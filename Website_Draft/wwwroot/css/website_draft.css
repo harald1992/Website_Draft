@@ -1,0 +1,35 @@
+.mainButtonStyle {
+  border-style: outset;
+  border-color: white;
+  border-radius: 25%; /* maakt de randjes van de border ronder*/
+
+  cursor: pointer;
+  transition: 0.3s;
+  opacity: 0.7;
+}
+
+.mainButtonStyle:hover {
+  opacity: .8;
+  box-shadow: .5px 1.5px 2.5px white;
+  text-shadow: 0 .5px .5px white;
+  transform: rotate(1deg) translate(-1px, 1px);
+}
+
+.mainButtonStyle:active {
+  opacity: 1;
+  box-shadow: 1px 3px 5px white;
+  text-shadow: 0 1px 1px white;
+}
+
+.rotate_element {
+  border-style: outset;
+  border-width: 3px;
+  border-radius: 50%; /* maakt de randjes van de border ronder*/
+  border-color: whitesmoke;
+  transition: 4s;
+}
+
+.rotate_element:hover {
+  transform: rotate(360deg) translate(-10px, 10px);
+  box-shadow: 1px 1px 1px 1px black;
+}
