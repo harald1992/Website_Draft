@@ -1,0 +1,55 @@
+﻿@{
+ViewData["Title"] = "Admin Home Page";
+}
+
+@model UserList
+@*Deze doen hetzelfde*@
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav nav-pills">
+        <li>
+            <p class="mainButtonStyle">
+                @Html.ActionLink("Create", "Create")
+            </p>
+        </li>
+        <li>
+            <p class="mainButtonStyle">
+                <a class="mainButtonStyle" draggable="false" asp-area="" asp-controller="Admin" asp-action="Create">Asp
+                    A link</a>
+            </p>
+        </li>
+    </ul>
+
+</div>
+
+<div class="div" id="users">
+    <h1>@ViewBag.Title</h1>
+    <div id="userTable">
+        <table class="table table-condensed" id="UserIndexTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>IsAdmin</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in @Model.Users)
+                {
+                <tr class="userRow">
+                    <td class="">@user.Id</td>
+                    <td class="">@user.Name</td>
+                    <td class="">@user.IsAdmin</td>
+                    <td> jalalalal
+                        <a asp-controller="Admin" asp-action="Detail" asp-route-id="@user.Id">
+                            <!-- <img class="imageCell" src="../../wwwroot/favicon.ico"> -->
+                        </a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
