@@ -1,24 +1,27 @@
 .mainButtonStyle {
   border-style: outset;
+  color: white;
   border-color: white;
-  border-radius: 25%; /* maakt de randjes van de border ronder*/
-
+  /* border-radius: 25%; maakt de randjes van de border ronder */
   cursor: pointer;
   transition: 0.3s;
   opacity: 0.7;
 }
 
 .mainButtonStyle:hover {
-  opacity: .8;
-  box-shadow: .5px 1.5px 2.5px white;
-  text-shadow: 0 .5px .5px white;
-  transform: rotate(1deg) translate(-1px, 1px);
+  color: white;
+  opacity: 0.8;
+  box-shadow: 0.5px 1.5px 2.5px white;
+  text-shadow: 0 0.5px 0.5px white;
+  /* transform: rotate(1deg) translate(-1px, 1px); */
 }
 
 .mainButtonStyle:active {
+  border-style: outset;
   opacity: 1;
   box-shadow: 1px 3px 5px white;
   text-shadow: 0 1px 1px white;
+  border: inset;
 }
 
 .lightingElement {
@@ -27,13 +30,14 @@
 }
 
 .lightingElement:hover {
-  opacity: .8;
-  box-shadow: .5px 1.5px 2.5px white;
-  text-shadow: 0 .5px .5px white;
+  opacity: 0.8;
+  box-shadow: 0.5px 0.5px 0.5px 2.5px white;
+  text-shadow: 0 0.5px 0.5px white;
+  /* font-size: 105%; */
 }
 
 .lightingElement:active {
   opacity: 1;
-  box-shadow: 1px 3px 5px white;
+  box-shadow: 1px 1px 1px 4px white;
   text-shadow: 0 1px 1px white;
 }

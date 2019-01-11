@@ -6,9 +6,9 @@ using Data.EntityModels;
 
 namespace Services
 {
-    public class UserService : IUser
+    public class UserService : IUserService
     {
-        private ApplicationDbContext _DbContext;
+        private readonly ApplicationDbContext _DbContext;
 
         public UserService(ApplicationDbContext dbContext)
         {
@@ -31,9 +31,9 @@ namespace Services
             _DbContext.SaveChanges();
         }
 
-        public void Remove(int id)
+        public void Remove(User userToDelete)
         {
-            _DbContext.Remove(GetById(id));
+            _DbContext.Remove(userToDelete);
             _DbContext.SaveChanges();
         }
 

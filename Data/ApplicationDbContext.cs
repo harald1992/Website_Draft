@@ -6,10 +6,16 @@ using Data.EntityModels;
 
 namespace Data
 {
-    public class ApplicationDbContext: DbContext
+    public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions options): base(options) { }
+        public ApplicationDbContext()
+        {
+        }
 
-        public DbSet<User> Users { get; set; }
+        public ApplicationDbContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        public virtual DbSet<User> Users { get; set; }
     }
 }

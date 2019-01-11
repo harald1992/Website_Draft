@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Data;
+using Data.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ViewModels;
 
@@ -10,18 +11,18 @@ namespace Presentation.Controllers
 {
     public class AdminController : Controller
     {
-        private IUser _Users;
+        private IUserService _Users;
 
-        public AdminController(IUser users)
+        public AdminController(IUserService users)
         {
             _Users = users;
         }
 
         public IActionResult Index()
         {
-            var users = _Users.GetAll();
+            var userList = _Users.GetAll();
 
-            var listingResult = users.Select(result => new UserListingModel
+            var listingResult = userList.Select(result => new UserListingModel
             {
                 Id = result.Id,
                 Name = result.Name,
@@ -32,14 +33,28 @@ namespace Presentation.Controllers
             {
                 Users = listingResult
             };
-            
+
             return View(model);
         }
 
-        [HttpGet]
-        public UserListingModel Create(string name)
+        [HttpPost]
+        public IActionResult Create(string name)
         {
-            return new UserListingModel { Name = name };
+            User newUser = new User
+            {
+                Name = name,
+                IsAdmin = false
+            };
+
+            _Users.Add(newUser);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            User userToDelete = _Users.GetById(id);
+            _Users.Remove(userToDelete);
+            return RedirectToAction("Index");
         }
 
     }

@@ -36,11 +36,13 @@ namespace Presentation
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton(Configuration);
-            services.AddScoped<IUser, UserService>();
+            services.AddScoped<IUserService, UserService>();
+
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection")));
 
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

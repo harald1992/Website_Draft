@@ -3,53 +3,50 @@ ViewData["Title"] = "Admin Home Page";
 }
 
 @model UserList
-@*Deze doen hetzelfde*@
-<div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav nav-pills">
-        <li>
-            <p class="mainButtonStyle">
-                @Html.ActionLink("Create", "Create")
-            </p>
-        </li>
-        <li>
-            <p class="mainButtonStyle">
-                <a class="mainButtonStyle" draggable="false" asp-area="" asp-controller="Admin" asp-action="Create">Asp
-                    A link</a>
-            </p>
-        </li>
-    </ul>
 
+<h1>@ViewBag.Title</h1>
+
+@using (Html.BeginForm("Create", "Admin", FormMethod.Post))
+{
+<div class="darkstyle">
+    Name: <input class="lightingElement" type="text" name="name">
+    <input class="mainButtonStyle" type="submit" value="Create User" />
 </div>
+}
 
-<div class="div" id="users">
-    <h1>@ViewBag.Title</h1>
+<br>
+<div class="container" id="users">
     <div id="userTable">
-        <table class="table table-condensed" id="UserIndexTable">
+        <table class="table table-condensed table-bordered" id="UserIndexTable">
             <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>IsAdmin</th>
-                    <th>Details</th>
+                <tr style="font-size: 125%">
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">IsAdmin</th>
+                    <th class="text-center">Details</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var user in @Model.Users)
                 {
-                <tr class="userRow">
+                <tr class="userRow lightingElement">
                     <td class="">@user.Id</td>
                     <td class="">@user.Name</td>
                     <td class="">@user.IsAdmin</td>
-                    <td> jalalalal
-                        <a asp-controller="Admin" asp-action="Detail" asp-route-id="@user.Id">
-                            <!-- <img class="imageCell" src="../../wwwroot/favicon.ico"> -->
-                        </a>
+                    <td>
+                        @using (Html.BeginForm("Delete", "Admin", FormMethod.Post))
+                        {
+                        <div class="">
+                            <input type="hidden" value="@user.Id" name="id" />
+                            <input class="mainButtonStyle" type="submit" value="Delete this user" />
+                        </div>
+
+                        }
                     </td>
                 </tr>
                 }
             </tbody>
+
         </table>
-
     </div>
-
 </div>
