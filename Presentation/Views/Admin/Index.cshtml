@@ -8,9 +8,9 @@ ViewData["Title"] = "Admin Home Page";
 
 @using (Html.BeginForm("Create", "Admin", FormMethod.Post))
 {
-<div class="darkstyle">
-    Name: <input class="lightingElement" type="text" name="name">
-    <input class="mainButtonStyle" type="submit" value="Create User" />
+<div class="">
+    Name: <input class="lightingElement darkstyle" type="text" name="name">
+    <input class="mainButtonStyle darkstyle" type="submit" value="Create User" />
 </div>
 }
 
@@ -29,7 +29,7 @@ ViewData["Title"] = "Admin Home Page";
             <tbody>
                 @foreach (var user in @Model.Users)
                 {
-                <tr class="userRow lightingElement">
+                <tr class="userRow lightingElement darkstyle">
                     <td class="">@user.Id</td>
                     <td class="">@user.Name</td>
                     <td class="">@user.IsAdmin</td>
@@ -38,7 +38,7 @@ ViewData["Title"] = "Admin Home Page";
                         {
                         <div class="">
                             <input type="hidden" value="@user.Id" name="id" />
-                            <input class="mainButtonStyle" type="submit" value="Delete this user" />
+                            <input class="mainButtonStyle darkstyle" type="submit" value="Delete this user" />
                         </div>
 
                         }
