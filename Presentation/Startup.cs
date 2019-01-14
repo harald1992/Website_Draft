@@ -36,7 +36,10 @@ namespace Presentation
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton(Configuration);
+
+            // Adding the Database-Services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMusicTrackService, MusicTrackService>();
 
 
             services.AddDbContext<ApplicationDbContext>(options =>

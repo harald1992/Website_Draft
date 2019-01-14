@@ -50,6 +50,7 @@ namespace Presentation.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             User userToDelete = _Users.GetById(id);

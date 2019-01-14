@@ -1,5 +1,108 @@
-@{
-    ViewData["Title"] = "Music Composing Home Page";
+@{ ViewData["Title"] = "Music Page"; }
+
+@model MusicTrackList
+
+<h1>@ViewBag.Title</h1>
+<br />
+
+@using (Html.BeginForm("Create", "MusicComposing", FormMethod.Post, new { enctype = "multipart/form-data" } ))
+{
+<div class="">
+    Name: <input class="lightingElement darkstyle" type="text" name="name">
+
+    Image:
+    <label class="mainButtonStyle darkstyle">
+        <input class="" type="file" name="image" style="display:none;" />
+        Upload Image Here
+    </label>
+
+    Music File:
+    <label class="mainButtonStyle darkstyle">
+        <input class="" type="file" name="image" style="display:none;" />
+        Upload Music File Here
+    </label>
+
+    <input class="mainButtonStyle darkstyle" type="submit" value="Create Track" />
+</div>
 }
 
-music composing
+<br />
+
+
+<br>
+
+<div class="container" id="musicTracks">
+    <div id="musicTrackTable">
+        <table class="table table-condensed table-bordered" id="musicTrackIndexTable">
+            <thead>
+                <tr style="font-size: 125%">
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Audio File</th>
+                    <th class="text-center">Edit</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var musictrack in @Model.MusicTracks)
+                {
+
+                <tr class="userRow lightingElement darkstyle">
+                    <td class="">@musictrack.Id</td>
+                    <td class="">
+                        @musictrack.Name
+                        <img class="card-img-top img-responsive" src="@musictrack.ImagePresentationSrc" alt="Card image cap">
+                    </td>
+
+                    <td class="">
+                        Audio File
+
+                    </td>
+
+                    <td>
+                        @using (Html.BeginForm("Delete", "MusicComposing", FormMethod.Post))
+                        {
+                        <div class="">
+                            <input type="hidden" value="@musictrack.Id" name="id" />
+                            <input class="mainButtonStyle darkstyle" type="submit" value="Delete this user" />
+                        </div>
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+
+
+@*
+
+<br>
+<p>nieuwe uploads</p>
+<div>
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+        Name: <input class="lightingElement darkstyle" type="text" name="name">
+        Image: <input type="file" id="files" name="image" />
+
+        <input type="submit" value="Create">
+</div>
+
+</form>
+</div>
+
+
+
+
+<form method="post" action="/MusicComposing/ShowFields" enctype="multipart/form-data">
+    <h1> Deze werkt!
+    </h1>
+    <input type="text" name="name" id="" />
+    <input type="file" name="image" id="" />
+    <input type="submit" value="GO!" />
+</form>
+*@
