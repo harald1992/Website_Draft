@@ -15,9 +15,9 @@ ViewData["Title"] = "Admin Home Page";
 }
 
 <br>
-<div class="container" id="users">
-    <div id="userTable">
-        <table class="table table-condensed table-bordered" id="UserIndexTable">
+<div class="container">
+    <div>
+        <table class="table table-condensed table-bordered">
             <thead>
                 <tr style="font-size: 125%">
                     <th class="text-center">Id</th>
@@ -29,7 +29,7 @@ ViewData["Title"] = "Admin Home Page";
             <tbody>
                 @foreach (var user in @Model.Users)
                 {
-                <tr class="userRow lightingElement darkstyle">
+                <tr class="lightingElement darkstyle">
                     <td class="">@user.Id</td>
                     <td class="">@user.Name</td>
                     <td class="">@user.IsAdmin</td>

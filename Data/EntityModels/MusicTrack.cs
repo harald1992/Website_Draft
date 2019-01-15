@@ -13,6 +13,8 @@ namespace Data.EntityModels
 
         public string ImageUrl { get; set; }
 
+        public string AudiofileUrl { get; set; }
+
         //public byte[] Image { get; set; }
 
         //public byte[] AudioFile { get; set; } 

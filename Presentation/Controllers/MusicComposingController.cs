@@ -32,7 +32,9 @@ namespace Presentation.Controllers
                 Id = result.Id,
                 Name = result.Name,
                 ImageUrl = result.ImageUrl,
-                ImagePresentationSrc = "images/" + result.ImageUrl
+                ImagePresentationSrc = "images/" + result.ImageUrl,
+                AudiofileUrl = result.AudiofileUrl,
+                AudiofilePresentationSrc = "music/" + result.AudiofileUrl,
             });
 
             var model = new MusicTrackList()
@@ -43,30 +45,38 @@ namespace Presentation.Controllers
             return View(model);
         }
 
-        public IActionResult Create(string name, IFormFile image)
+        public IActionResult Create(string name, IFormFile image, IFormFile audioFile)
         {
-            if (image != null)
+            if (image != null && audioFile != null)
             {
-                // wwwRoot/images
+                // Image Kopieren naar wwwRoot/images
                 var imagesFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
                 var imageUrl = Path.Combine(imagesFolder, Path.GetFileName(image.FileName));
-
                 image.CopyTo(new FileStream(imageUrl, FileMode.Create));
                 //File moet nu in de wwwroot/images folder ziten.
 
+
+                // Image Kopieren naar wwwRoot/images
+                var audiofileFolder = Path.Combine(hostingEnvironment.WebRootPath, "music");
+                var audiofileUrl = Path.Combine(audiofileFolder, Path.GetFileName(audioFile.FileName));
+                audioFile.CopyTo(new FileStream(audiofileUrl, FileMode.Create));
+                //Audio bestand moet nu in de wwwroot/music folder ziten.
+
+
                 //Alleen de naam is genoeg om te laten zien, src="" is erop aangepast. 
                 //Ivm security mag je niet een vol path bijv C://users/ etc bereiken vanuit frontend.
-                CreateMusicTrackInDB(name, Path.GetFileName(image.FileName));
+                CreateMusicTrackInDB(name, Path.GetFileName(image.FileName), Path.GetFileName(audioFile.FileName));
             }
             return RedirectToAction("Index");
         }
 
-        public void CreateMusicTrackInDB(string name, string imgUrl)
+        public void CreateMusicTrackInDB(string name, string imgUrl, string audiofileUrl)
         {
             MusicTrack trackToCreate = new MusicTrack
             {
                 Name = name,
-                ImageUrl = imgUrl
+                ImageUrl = imgUrl,
+                AudiofileUrl = audiofileUrl
             };
             _MusicTracks.Add(trackToCreate);
         }

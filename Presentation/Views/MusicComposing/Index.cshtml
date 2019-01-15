@@ -1,108 +1,135 @@
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+
 @{ ViewData["Title"] = "Music Page"; }
 
 @model MusicTrackList
 
 <h1>@ViewBag.Title</h1>
+
 <br />
 
-@using (Html.BeginForm("Create", "MusicComposing", FormMethod.Post, new { enctype = "multipart/form-data" } ))
+@using (Html.BeginForm("Create", "MusicComposing", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-<div class="">
-    Name: <input class="lightingElement darkstyle" type="text" name="name">
+<div class="container">
+    <div class="row">
 
-    Image:
-    <label class="mainButtonStyle darkstyle">
-        <input class="" type="file" name="image" style="display:none;" />
-        Upload Image Here
-    </label>
+        <div class="col-md-4">
+            Name: <input class="lightingElement darkstyle" id="nameField" type="text" name="name">
+            <span class="fas fa-check" id="nameCheck" style="display:none;"></span>
+        </div>
 
-    Music File:
-    <label class="mainButtonStyle darkstyle">
-        <input class="" type="file" name="image" style="display:none;" />
-        Upload Music File Here
-    </label>
+        <div class="col-md-4">
+            Image:
+            <label class="mainButtonStyle darkstyle">
+                <input class="" type="file" name="image" id="imageField" style="display:none;" />
+                Upload Image Here
+            </label>
+            <span class="fas fa-check" id="imageCheck" style="display:none;"></span>
 
-    <input class="mainButtonStyle darkstyle" type="submit" value="Create Track" />
+        </div>
+
+        <div class="col-md-4">
+            Music File:
+            <label class="mainButtonStyle darkstyle">
+                <input class="" type="file" name="audioFile" id="audioField" style="display:none;" />
+                Upload Music File Here
+            </label>
+            <span class="fas fa-check" id="audioCheck" style="display:none;"></span>
+
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="container">
+            <div class="imgContainer">
+                <input class="mainButtonStyle darkstyle centered" type="submit" value="Create Track" />
+            </div>
+        </div>
+    </div>
+
 </div>
 }
 
 <br />
+<br />
 
+<div class="container">
 
-<br>
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr style="font-size: 125%">
+                <th class="text-center">Id</th>
+                <th class="text-center">Track</th>
+                <th class="text-center">Audio File</th>
+                <th class="text-center">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var musictrack in @Model.MusicTracks)
+            {
+            <tr class="lightingElement darkstyle">
 
-<div class="container" id="musicTracks">
-    <div id="musicTrackTable">
-        <table class="table table-condensed table-bordered" id="musicTrackIndexTable">
-            <thead>
-                <tr style="font-size: 125%">
-                    <th class="text-center">Id</th>
-                    <th class="text-center">Name</th>
-                    <th class="text-center">Audio File</th>
-                    <th class="text-center">Edit</th>
+                <td class="">@musictrack.Id</td>
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var musictrack in @Model.MusicTracks)
-                {
+                <td class="">
+                    <div class="imgContainer">
+                        <img class="musicTrackImage" src="@musictrack.ImagePresentationSrc" alt="Track Image" style="width: 200px; height: 200px;">
+                        <div class="centered">@musictrack.Name</div>
+                    </div>
+                </td>
 
-                <tr class="userRow lightingElement darkstyle">
-                    <td class="">@musictrack.Id</td>
-                    <td class="">
-                        @musictrack.Name
-                        <img class="card-img-top img-responsive" src="@musictrack.ImagePresentationSrc" alt="Card image cap">
-                    </td>
+                <td class="">
 
-                    <td class="">
-                        Audio File
+                    @{ string source = "~/music/" + System.Net.WebUtility.UrlEncode(musictrack.AudiofileUrl); }
 
-                    </td>
+                    <div class="container">
+                        <audio controls src="@Url.Content(source)" type="audio/mp3" />
+                    </div>
 
-                    <td>
-                        @using (Html.BeginForm("Delete", "MusicComposing", FormMethod.Post))
-                        {
-                        <div class="">
-                            <input type="hidden" value="@musictrack.Id" name="id" />
-                            <input class="mainButtonStyle darkstyle" type="submit" value="Delete this user" />
-                        </div>
-                        }
-                    </td>
-                </tr>
-                }
-            </tbody>
+                    @*<video controls src=@source type="video/mp4" />*@
+                    @*<audio src="@Url.Content(source)" type="audio/mp3" />*@
 
-        </table>
-    </div>
+                    @*<audio src="@Url.Content(" ~/untitled.mp3")" type="audio/mp3" />*@
+
+                    @*<div class="container">
+                        <video controls src="@Url.Content(" ~/SampleAudio.mp3")" type="audio/mp3" />
+                    </div>*@
+
+                </td>
+
+                <td>
+                    @using (Html.BeginForm("Delete", "MusicComposing", FormMethod.Post))
+                    {
+                    <div class="">
+                        <input type="hidden" value="@musictrack.Id" name="id" />
+                        <input class="mainButtonStyle darkstyle" type="submit" value="Delete this user" />
+                    </div>
+                    }
+                </td>
+            </tr>
+            }
+
+        </tbody>
+
+    </table>
 </div>
 
+<script type="text/javascript">
+    document.getElementById('nameField').addEventListener("change",
+        function (event) {
+            document.getElementById("nameCheck").style = "display:inline;";
+        });
 
+        document.getElementById('imageField').addEventListener("change",
+        function (event) {
+            document.getElementById("imageCheck").style = "display:inline;";
+        });
 
-
-@*
-
-<br>
-<p>nieuwe uploads</p>
-<div>
-    <form asp-action="Create" method="post" enctype="multipart/form-data">
-
-        Name: <input class="lightingElement darkstyle" type="text" name="name">
-        Image: <input type="file" id="files" name="image" />
-
-        <input type="submit" value="Create">
-</div>
-
-</form>
-</div>
-
-
-
-
-<form method="post" action="/MusicComposing/ShowFields" enctype="multipart/form-data">
-    <h1> Deze werkt!
-    </h1>
-    <input type="text" name="name" id="" />
-    <input type="file" name="image" id="" />
-    <input type="submit" value="GO!" />
-</form>
-*@
+        document.getElementById('audioField').addEventListener("change",
+        function (event) {
+            document.getElementById("audioCheck").style = "display:inline;";
+        });
+</script>

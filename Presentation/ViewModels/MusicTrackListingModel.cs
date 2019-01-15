@@ -23,5 +23,10 @@ namespace Presentation.ViewModels
         public string ImageUrl;
 
         public string ImagePresentationSrc;
+
+        public string AudiofileUrl;
+
+        public string AudiofilePresentationSrc;
+
     }
 }

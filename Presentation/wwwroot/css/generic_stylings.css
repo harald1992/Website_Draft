@@ -44,3 +44,20 @@ body {
     display: none;
   }
 }
+
+/* div above centered div with image */
+.imgContainer {
+  position: relative;
+  text-align: center;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-size: larger;
+  font-weight: bold;
+}
