@@ -1,5 +1,169 @@
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+
+
 @{
     ViewData["Title"] = "Webshop Home Page";
 }
 
-Webshop
+@model WebshopItemViewmodelList
+
+<h1>@ViewBag.Title</h1>
+
+
+<div class="container">
+    <div class="row">
+        <div class="card mt-4 darkstyle">
+            <img class="card-img-top img-fluid" src="http://placehold.it/500x50" alt="">
+
+            <h3>Filter by Categories</h3>
+            <nav class="navbar navbar-expand-lg">
+                <div class="collapse navbar-collapse darkstyle" id="navbarSupportedContent">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="mainButtonStyle nav-link" draggable="false" asp-area="" asp-controller="Webshop" asp-action="">
+
+                                <i class="fas fa-american-sign-language-interpreting"></i>
+                                All
+                                <span class="badge badge-primary badge-pill">@Model.DatabaseCount</span>
+
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="mainButtonStyle nav-link" draggable="false" asp-area="" asp-controller="Webshop" asp-action="Index" asp-route-category="Badminton">
+                                <i class="fas fa-american-sign-language-interpreting"></i>
+                                Badminton
+                                <span class="badge badge-primary badge-pill">@Model.DatabaseCount_Badminton</span>
+
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="card-body">
+
+                @using (Html.BeginForm("Create", "Webshop", FormMethod.Post))
+                {
+                    <div class="">
+                        Name: <input class="lightingElement darkstyle" type="text" name="name">
+                        Description: <input class="lightingElement darkstyle" type="text" name="description">
+                        Category: <input class="lightingElement darkstyle" type="text" name="category">
+                        Price: <input class="lightingElement darkstyle" type="number" name="Price">
+
+                        <input class="mainButtonStyle darkstyle" type="submit" value="Create WebshopItem" />
+                    </div>
+                }
+
+                <br>
+
+                <div class="container">
+                    <div>
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                                <tr style="font-size: 125%">
+                                    <th class="text-center">Id</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Description</th>
+                                    <th class="text-center">Price</th>
+                                    <th class="text-center">Edit</th>
+                                    <th class="text-center">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in @Model.WebshopItems)
+                                {
+                                    <tr class="lightingElement darkstyle">
+                                        <td>@item.Id</td>
+                                        <td>@item.Name</td>
+
+                                        <td>
+                                            @item.Description
+                                            <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                                        </td>
+                                        <td>@item.Price</td>
+                                        <td>
+                                            <button id="editButton" type="button" class="mainButtonStyle darkstyle" data-toggle="modal" data-target="#editItem" onclick="SetCurrentId('@item.Id',' @item.Name', '@item.Description', '@item.Price', '@item.Category')">
+                                                Edit
+                                            </button>
+
+                                        </td>
+                                        <td>
+                                            @using (Html.BeginForm("Delete", "Webshop", FormMethod.Post))
+                                            {
+                                                <div class="">
+                                                    <input type="hidden" value="@item.Id" name="id" />
+                                                    <input class="mainButtonStyle darkstyle" type="submit" value="Delete This Item" />
+                                                </div>
+                                            }
+                                        </td>
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content darkstyle">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit this</h5>
+                <button type="button" class="close mainbuttonStyle lightingElement" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="width:inherit; height:inherit";>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Edit", "Webshop", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        @*<label>Id value: static</label>*@
+                        <input id="ModalSelectedIdInput" type="hidden" name="id" />
+                    </div>
+                    <div class="form-group">
+                        <label for="id" class="col-form-label">Old Name value:</label>
+                        <input class="lightingElement darkstyle" type="text" name="name" id="ModalSelectedName">
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="id" class="col-form-label">  Old Description value:</label>
+                        <input class="lightingElement darkstyle" type="text" name="description" id="ModalSelectedDescription">
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="id" class="col-form-label"> Old Price value:</label>
+                        <input class="lightingElement darkstyle" type="number" name="price" id="ModalSelectedPrice">
+                    </div>
+                    <div class="form-group">
+                        <label for="id" class="col-form-label">Old Category value:</label>
+                        <input class="lightingElement darkstyle" type="text" name="category" id="ModalSelectedCategory">
+                    </div>
+                    <div class="modal-footer">
+                        <input class="mainButtonStyle darkstyle" type="submit" value="Edit" />
+                        <button type="button" class="mainButtonStyle darkstyle" data-dismiss="modal">Close</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    function SetCurrentId(id, name, description, price, category) {
+        $('#ModalSelectedIdInput').val(id);
+
+        $('#ModalSelectedName').val(name);
+        $('#ModalSelectedDescription').val(description);
+        $('#ModalSelectedPrice').val(price);
+        $('#ModalSelectedCategory').val(category);
+    };
+
+        // Bijv vullen van een id ipv value $('#ModalSelectedId').empty().append(id);
+</script>

@@ -15,12 +15,5 @@ namespace Data.EntityModels
 
         public string AudiofileUrl { get; set; }
 
-        //public byte[] Image { get; set; }
-
-        //public byte[] AudioFile { get; set; } 
-
-        //public IFormFile Picture { get; set; } 
-        //public string FileLocation { get; set; }
-
     }
 }

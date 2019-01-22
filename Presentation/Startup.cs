@@ -40,6 +40,7 @@ namespace Presentation
             // Adding the Database-Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMusicTrackService, MusicTrackService>();
+            services.AddScoped<IWebshopService, WebshopService>();
 
 
             services.AddDbContext<ApplicationDbContext>(options =>

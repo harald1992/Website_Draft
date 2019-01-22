@@ -18,6 +18,7 @@ namespace Data
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<MusicTrack> MusicTracks{ get; set; }
+        public virtual DbSet<WebshopItem> WebshopItems { get; set; }
 
     }
 }

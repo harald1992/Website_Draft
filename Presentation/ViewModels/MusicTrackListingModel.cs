@@ -8,16 +8,9 @@ namespace Presentation.ViewModels
 {
     public class MusicTrackListingModel
     {
-        //public int Id;
-        //public string Name;
-        //public string FileLocation;
-        //public IFormFile Picture;
-        //public string FileLocation
-        //public IFormFile Picture { get; set; }
-
-
 
         public int Id;
+
         public string Name;
 
         public string ImageUrl;

@@ -1,57 +1,57 @@
-<div class="container-fluid" style="position: fixed; z-index: 999; outline: 1px solid gray;">
 
 @{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
     var actionName = this.ViewContext.RouteData.Values["action"].ToString();
     }
 
-<nav class="navbar navbar-expand-lg">
+<div class="container-fluid" style="position: fixed; z-index: 999; outline: 1px solid gray;">
+        <nav class="navbar navbar-expand-lg">
 
-    <button class="navbar-toggler bg-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="fas fa-amazon-pay"></span>
-    </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-caret-square-down fa-2x text-white"></i>
+            </button>
 
-    <div class="collapse navbar-collapse darkstyle" id="navbarSupportedContent">
-        <ul class="nav">
+            <div class="collapse navbar-collapse darkstyle" id="navbarSupportedContent">
+                <ul class="nav">
 
-            <li class="nav-item">
-                <a class="mainButtonStyle nav-link active" draggable="false" asp-area="" asp-controller="Home"
-                    asp-action="Index">
-                    <i class="fas fa-archway"></i>
-                    Home
-                </a>
-            </li>
+                    <li class="nav-item">
+                        <a class="mainButtonStyle nav-link active" draggable="false" asp-area="" asp-controller="Home"
+                           asp-action="Index">
+                            <i class="fas fa-archway"></i>
+                            Home
+                        </a>
+                    </li>
 
-            <li class="nav-item">
-                <a class="mainButtonStyle nav-link" draggable="false" asp-area="" asp-controller="Home" asp-action="About">
-                    <i class="fas fa-american-sign-language-interpreting"></i>
-                    About
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="mainButtonStyle nav-link" draggable="false" asp-controller="Home" asp-action="Contact">
-                    <i class="fas fa-address-card"></i>
-                    Contact
-                </a>
-            </li>
+                    <li class="nav-item">
+                        <a class="mainButtonStyle nav-link" draggable="false" asp-area="" asp-controller="Home" asp-action="About">
+                            <i class="fas fa-american-sign-language-interpreting"></i>
+                            About
+                        </a>
+                    </li>
 
-            <li class="nav-item" style="position: fixed; left: 50%;">               
-                <a class="lightingElement nav-link">
-                    Current Page: @controllerName @actionName
-                </a>
-            </li>
+                    <li class="nav-item">
+                        <a class="mainButtonStyle nav-link" draggable="false" asp-controller="Home" asp-action="Contact">
+                            <i class="fas fa-address-card"></i>
+                            Contact
+                        </a>
+                    </li>
 
-            <li class="nav-item" style="position: fixed; right: 0px;">
-                <a class="mainButtonStyle nav-link" draggable="false" asp-area="" asp-controller="Admin" asp-action="Index">
-                    <i class="fas fa-certificate"></i>
-                    Admin Page
-                </a>
-            </li>
+                    <li class="nav-item" style="position: relative; left: 50%;">
+                        <a class="lightingElement nav-link">
+                            Current Page: @controllerName @actionName
+                        </a>
+                    </li>
 
-        </ul>
+                    <li class="nav-item" style="position: fixed; right: 0px;">
+                        <a class="mainButtonStyle nav-link" draggable="false" asp-area="" asp-controller="Admin" asp-action="Index">
+                            <i class="fas fa-certificate"></i>
+                            Admin Page
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
     </div>
-</nav>
-
-</div>
