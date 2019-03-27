@@ -46,7 +46,14 @@ namespace Presentation
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection")));
 
-        
+            //----------------
+            // Voor angular app integratie:  Cross-Origin requests (CORS) 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOriginsHeadersAndMethods", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
+            //----------------
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +72,11 @@ namespace Presentation
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            //-------------
+            //Enable Cross-Origin requests (CORS) voor angular integratie
+            app.UseCors("AllowAllOriginsHeadersAndMethods");
+            //----------------
 
             app.UseMvc(routes =>
             {
